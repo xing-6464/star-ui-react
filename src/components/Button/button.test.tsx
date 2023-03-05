@@ -2,10 +2,19 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import Button from './button'
 
-describe('test Button', () => {
-  it('our first react test case', () => {
+describe('test Button component', () => {
+  it('should render the correct default button', () => {
     render(<Button>Click</Button>)
 
-    expect(screen.queryByText('Click')).toBeTruthy()
+    const element = screen.getByText('Click')
+
+    expect(element).toBeInTheDocument()
+    expect(element.tagName).toEqual('BUTTON')
+    expect(element).toHaveClass('btn btn-default')
   })
+
+  it('should render the correct component based on different props', () => {})
+
+  it('should render a link when btnType equals link and href is provided', () => {})
+  it('should render disabled button when disabled set to true', () => {})
 })
