@@ -5,8 +5,7 @@ import Alert from './components/Alert/alert'
 function App() {
   return (
     <div>
-      <Alert description="xing" />
-      <Alert title="这是标题" />
+      <Button btnType="primary">click</Button>
     </div>
   )
 }
