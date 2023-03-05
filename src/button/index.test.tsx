@@ -22,7 +22,7 @@ describe('Button', () => {
     expect(container.querySelector('.ant-btn-primary')).toBeInTheDocument()
   })
 
-  it('should support Button', () => {
+  it('should support click', () => {
     const onClick = vi.fn()
     render(
       <Button type="primary" onClick={onClick}>
@@ -33,5 +33,18 @@ describe('Button', () => {
     fireEvent.click(likeElement)
 
     expect(onClick).toBeCalled()
+  })
+
+  it('should support blur', () => {
+    const onBlur = vi.fn()
+    render(
+      <Button type="primary" onBlur={onBlur}>
+        click
+      </Button>
+    )
+    const likeElement = screen.getByText(/click/i)
+    fireEvent.blur(likeElement)
+
+    expect(onBlur).toBeCalled()
   })
 })
