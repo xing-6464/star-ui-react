@@ -1,15 +1,21 @@
 import React from 'react'
+import Button from './components/Button/button'
 
 function App() {
   return (
     <div>
-      <h1>hello</h1>
-      <h2>hello</h2>
-      <h3>hello</h3>
-      <h4>hello</h4>
-      <a className="App-link" href="https://" target="_blank">
-        sdas
-      </a>
+      <Button>Hello</Button>
+      <Button btnType="primary" size="lg">
+        Hello
+      </Button>
+      <Button btnType="danger">Hello</Button>
+      <Button btnType="link" href="https://www.baidu.com" target="_blank">
+        Hello
+      </Button>
+      <Button btnType="link" href="https://www.baidu.com" disabled>
+        disabled
+      </Button>
+      <Button disabled>Hello</Button>
     </div>
   )
 }
