@@ -1,4 +1,5 @@
-// import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
+import { jest } from '@jest/globals'
 // import { setGlobalConfig } from '@storybook/testing-react';
 // import { getWorker } from 'msw-storybook-addon';
 // import * as globalStorybookConfig from '../.storybook/preview';
