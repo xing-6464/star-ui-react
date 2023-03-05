@@ -13,7 +13,9 @@ describe('test Button component', () => {
     expect(element).toHaveClass('btn btn-default')
   })
 
-  it('should render the correct component based on different props', () => {})
+  it('should render the correct component based on different props', () => {
+    render(<Button>Click</Button>)
+  })
 
   it('should render a link when btnType equals link and href is provided', () => {})
   it('should render disabled button when disabled set to true', () => {})
