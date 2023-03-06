@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 export type AlertType = 'success' | 'default' | 'danger' | 'warning'
 
-interface AlertProps {
+export interface AlertProps {
   title?: string
   description?: string
   type?: AlertType
@@ -14,6 +14,7 @@ interface AlertProps {
 const Alert: React.FC<AlertProps> = (props) => {
   const [hide, setHide] = useState(false)
   const { title, description, type, onClose, closable } = props
+
   const classes = classNames('star-alert', {
     [`star-alert-${type}`]: type,
   })
