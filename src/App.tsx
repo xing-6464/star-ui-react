@@ -4,10 +4,15 @@ import { Menu, MenuItme } from './components/Menu'
 function App() {
   return (
     <div>
-      <Menu>
-        <MenuItme>cool link</MenuItme>
-        <MenuItme>cool link 2</MenuItme>
-        <MenuItme>cool link 3</MenuItme>
+      <Menu
+        defaultIndex={0}
+        onSelect={(index) => {
+          alert(index)
+        }}
+      >
+        <MenuItme index={0}>cool link</MenuItme>
+        <MenuItme index={1}>cool link 2</MenuItme>
+        <MenuItme index={2}>cool link 3</MenuItme>
       </Menu>
     </div>
   )
