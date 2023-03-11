@@ -1,11 +1,14 @@
 import React from 'react'
-import Button from './components/Button/button'
-import Alert from './components/Alert/alert'
+import { Menu, MenuItme } from './components/Menu'
 
 function App() {
   return (
     <div>
-      <Button btnType="primary">click</Button>
+      <Menu>
+        <MenuItme>cool link</MenuItme>
+        <MenuItme>cool link 2</MenuItme>
+        <MenuItme>cool link 3</MenuItme>
+      </Menu>
     </div>
   )
 }
