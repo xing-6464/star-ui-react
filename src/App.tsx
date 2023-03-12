@@ -1,24 +1,17 @@
 import React from 'react'
-import { Menu, MenuItme, SubMenu } from './components/Menu'
+import { Tabs, TabItem } from './components/Tabs'
 
 function App() {
   return (
     <div>
-      <Menu
-        defaultIndex="0"
-        onSelect={(index) => {
-          alert(index)
-        }}
-        mode="vertical"
-        defaultOpenSubMenus={['1']}
-      >
-        <MenuItme>cool link</MenuItme>
-        <SubMenu title="dropdown">
-          <MenuItme>dropdown1</MenuItme>
-          <MenuItme>dropdown2</MenuItme>
-        </SubMenu>
-        <MenuItme>cool link 3</MenuItme>
-      </Menu>
+      <Tabs defaultIndex={0} onSelect={() => {}} type="card">
+        <TabItem label="card1">this is card one</TabItem>
+        <TabItem label="card2">this is card one1</TabItem>
+        <TabItem label="card3">this is card one2</TabItem>
+        <TabItem label="disabled" disabled>
+          this is card one2
+        </TabItem>
+      </Tabs>
     </div>
   )
 }
