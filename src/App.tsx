@@ -5,11 +5,12 @@ function App() {
   return (
     <div>
       <Menu
-        defaultIndex={0}
-        mode="vertical"
+        defaultIndex="0"
         onSelect={(index) => {
           alert(index)
         }}
+        mode="vertical"
+        defaultOpenSubMenus={['1']}
       >
         <MenuItme>cool link</MenuItme>
         <SubMenu title="dropdown">
