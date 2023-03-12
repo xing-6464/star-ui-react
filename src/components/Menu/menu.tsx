@@ -26,6 +26,7 @@ export const Menu: React.FC<MenuProps> = (props) => {
 
   const classes = classNames('star-menu', className, {
     'menu-vertical': mode === 'vertical',
+    'menu-horizontal': mode !== 'vertical',
   })
 
   const hanldeClick = (index: number) => {
@@ -45,7 +46,7 @@ export const Menu: React.FC<MenuProps> = (props) => {
         child as React.FunctionComponentElement<MenuItemProps>
 
       const { displayName } = childElement.type
-      if (displayName === 'MenuItem') {
+      if (displayName === 'MenuItem' || displayName === 'SubMenu') {
         return React.cloneElement(childElement, { index })
       } else {
         console.error(
