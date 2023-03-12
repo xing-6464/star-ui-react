@@ -9,7 +9,7 @@ export interface MenuProps {
   mode?: MenuMode
   style?: React.CSSProperties
   onSelect?: SelectCallback
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 interface IMenuContext {
@@ -39,7 +39,7 @@ export const Menu: React.FC<MenuProps> = (props) => {
   }
 
   return (
-    <ul className={classes} style={style}>
+    <ul className={classes} style={style} data-testid="test-menu">
       <MenuContext.Provider value={passedContext}>
         {children}
       </MenuContext.Provider>
