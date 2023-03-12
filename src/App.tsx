@@ -9,7 +9,7 @@ library.add(fas)
 function App() {
   return (
     <div>
-      <Icon icon="arrow-down" theme="danger" size="10x" />
+      <Icon icon="arrow-down" theme="primary" size="10x" />
       <Tabs defaultIndex={0} onSelect={() => {}} type="card">
         <TabItem label="card1">this is card one</TabItem>
         <TabItem label="card2">this is card one1</TabItem>
