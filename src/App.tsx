@@ -1,12 +1,9 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 import { Icon } from './components/Icon'
 import { Tabs, TabItem } from './components/Tabs'
 import { Menu, MenuItme, SubMenu } from './components/Menu'
 
-library.add(fas)
 function App() {
   return (
     <div>
