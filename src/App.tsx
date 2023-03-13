@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <Icon icon="arrow-down" theme="primary" size="10x" />
-      <Menu mode="vertical">
+      <Menu>
         <MenuItme>星</MenuItme>
         <SubMenu title="xing">
           <MenuItme>drop1</MenuItme>
