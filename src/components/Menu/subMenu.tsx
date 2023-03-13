@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import classNames from 'classnames'
 import { MenuContext } from './menu'
 import { MenuItemProps } from './menuItem'
+import { Icon } from '../Icon'
 
 export interface SubMenuProps {
   index?: string
@@ -27,6 +28,8 @@ export const SubMenu: React.FC<SubMenuProps> = ({
 
   const classes = classNames('menu-item submenu-item', className, {
     'is-active': context.index === index,
+    'is-opened': menuOpen,
+    'is-vertical': context.mode === 'vertical',
   })
 
   const handleClick = (e: React.MouseEvent) => {
@@ -83,6 +86,7 @@ export const SubMenu: React.FC<SubMenuProps> = ({
     <li key={index} className={classes} {...hoverEvent}>
       <div className="submenu-title" {...clickEvents}>
         {title}
+        <Icon icon="angle-down" className="arrow-icon" />
       </div>
       {renderChildren()}
     </li>
