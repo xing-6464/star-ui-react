@@ -17,6 +17,11 @@ export const Default = Template.bind({})
 Default.args = {
   children: 'Default Button',
 }
+Default.decorators = [
+  (Story) => {
+    return <div style={{ margin: '50px' }}>{Story()}</div>
+  },
+]
 
 export const Large = Template.bind({})
 Large.args = {
