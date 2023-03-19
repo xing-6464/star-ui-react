@@ -11,3 +11,5 @@ export interface TabItemProps {
 export const TabItem: FC<TabItemProps> = ({ children }) => {
   return <div className="star-tab-panel">{children}</div>
 }
+
+export default TabItem

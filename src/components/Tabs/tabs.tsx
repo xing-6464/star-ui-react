@@ -14,6 +14,15 @@ export interface TabsProps {
   children?: ReactNode
 }
 
+/**
+ * 选项卡切换组件。
+ * 提供平级的区域将大块内容进行收纳和展现，保持界面整洁。
+ * ### 引用方法
+ *
+ * ~~~js
+ * import { Tabs } from 'star'
+ * ~~~
+ */
 export const Tabs: FC<TabsProps> = (props) => {
   const { defaultIndex, className, onSelect, children, type } = props
   const [activeIndex, setActiveIndex] = useState(defaultIndex)
@@ -74,3 +83,5 @@ Tabs.defaultProps = {
   defaultIndex: 0,
   type: 'line',
 }
+
+export default Tabs
