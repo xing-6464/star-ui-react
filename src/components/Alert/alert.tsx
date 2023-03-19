@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
-import { Transition } from '../Transition'
+import Transition from '../Transition'
 export type AlertType = 'success' | 'default' | 'danger' | 'warning'
 
 export interface AlertProps {

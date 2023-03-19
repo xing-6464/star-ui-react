@@ -1,7 +1,7 @@
 import React, { ReactNode, useContext, useState } from 'react'
 import classNames from 'classnames'
 
-import { Transition } from '../Transition'
+import Transition from '../Transition'
 import { MenuContext } from './menu'
 import { MenuItemProps } from './menuItem'
 import Icon from '../Icon'
