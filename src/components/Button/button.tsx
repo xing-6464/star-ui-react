@@ -3,7 +3,7 @@ import React from 'react'
 
 import type { ButtonProps } from './buttonProps'
 
-const Button: React.FC<ButtonProps> = (props) => {
+export const Button: React.FC<ButtonProps> = (props) => {
   const { btnType, className, size, children, disabled, href, ...restProps } =
     props
 
@@ -32,5 +32,3 @@ Button.defaultProps = {
   disabled: false,
   btnType: 'default',
 }
-
-export default Button
