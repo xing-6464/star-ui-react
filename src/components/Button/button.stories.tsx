@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof Button> = (args) => {
 
 export const Default = Template.bind({})
 Default.args = {
-  children: 'Default Button',
+  children: '默认按钮',
 }
 Default.decorators = [
   (Story) => {
