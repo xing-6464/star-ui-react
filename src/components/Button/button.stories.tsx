@@ -4,7 +4,7 @@ import { Button } from './button'
 import type { ComponentMeta, ComponentStory } from '@storybook/react'
 
 const buttonMeta: ComponentMeta<typeof Button> = {
-  title: 'Button',
+  title: 'Button 组件',
   component: Button,
 }
 export default buttonMeta
@@ -26,27 +26,27 @@ Default.decorators = [
 export const Large = Template.bind({})
 Large.args = {
   size: 'lg',
-  children: 'Large Button',
+  children: '大的 Button',
 }
 export const Small = Template.bind({})
 Small.args = {
   size: 'sm',
-  children: 'Small Button',
+  children: '小的 Button',
 }
 export const Primary = Template.bind({})
 Primary.args = {
   btnType: 'primary',
-  children: 'Primary Button',
+  children: '主要的颜色 Button',
 }
 export const Danger = Template.bind({})
 Danger.args = {
   btnType: 'danger',
-  children: 'Danger Button',
+  children: '危险的颜色 Button',
 }
 export const Link = Template.bind({})
 Link.args = {
   btnType: 'link',
-  children: 'Link Button',
+  children: '链接',
   href: 'https://google.com',
 }
 
