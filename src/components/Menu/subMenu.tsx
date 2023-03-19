@@ -1,16 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { ReactNode, useContext, useState } from 'react'
 import classNames from 'classnames'
 
 import { Transition } from '../Transition'
 import { MenuContext } from './menu'
 import { MenuItemProps } from './menuItem'
-import { Icon } from '../Icon'
+import Icon from '../Icon'
 
 export interface SubMenuProps {
   index?: string
+  /**下拉菜单选项的文字 */
   title: string
+  /**下拉菜单选型的扩展类名 */
   className?: string
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 export const SubMenu: React.FC<SubMenuProps> = ({

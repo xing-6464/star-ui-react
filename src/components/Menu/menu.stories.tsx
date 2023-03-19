@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Menu from './index'
 
 export default {
-  title: 'Menu',
+  title: 'Menu 组件',
   id: 'Menu',
   component: Menu,
   subcomponents: { SubMenu: Menu.SubMenu, Item: Menu.Item },
