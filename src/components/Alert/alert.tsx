@@ -1,20 +1,25 @@
+import React, { FC, useState } from 'react'
 import classNames from 'classnames'
-import React, { useState } from 'react'
-
+import { Icon } from '../Icon'
+import { Transition } from '../Transition'
 export type AlertType = 'success' | 'default' | 'danger' | 'warning'
 
 export interface AlertProps {
-  title?: string
+  /**标题 */
+  title: string
+  /**描述 */
   description?: string
+  /**类型 四种可选 针对四种不同的场景 */
   type?: AlertType
+  /**关闭alert时触发的事件 */
   onClose?: () => void
+  /**是否显示关闭图标*/
   closable?: boolean
 }
 
-const Alert: React.FC<AlertProps> = (props) => {
+export const Alert: FC<AlertProps> = (props) => {
   const [hide, setHide] = useState(false)
   const { title, description, type, onClose, closable } = props
-
   const classes = classNames('star-alert', {
     [`star-alert-${type}`]: type,
   })
@@ -27,27 +32,22 @@ const Alert: React.FC<AlertProps> = (props) => {
     }
     setHide(true)
   }
-
-  if (!hide) {
-    return (
+  return (
+    <Transition in={!hide} timeout={300} animation="zoom-in-top">
       <div className={classes}>
         <span className={titleClass}>{title}</span>
         {description && <p className="star-alert-desc">{description}</p>}
         {closable && (
           <span className="star-alert-close" onClick={handleClose}>
-            关闭
+            <Icon icon="times" />
           </span>
         )}
       </div>
-    )
-  } else {
-    return <></>
-  }
+    </Transition>
+  )
 }
 
 Alert.defaultProps = {
   type: 'default',
   closable: true,
 }
-
-export default Alert

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
-import Button from './button'
+import { Button } from './button'
 import type { ButtonProps } from './buttonProps'
 
 const defaultProps = {

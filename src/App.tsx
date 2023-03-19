@@ -4,6 +4,7 @@ import { Tabs, TabItem } from './components/Tabs'
 import { Menu, MenuItme, SubMenu } from './components/Menu'
 import { Button } from './components/Button'
 import { Transition } from './components/Transition'
+import { Alert } from './components/Alert/alert'
 
 function App() {
   const [show, setShow] = useState(false)
