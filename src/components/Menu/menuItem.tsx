@@ -11,7 +11,7 @@ export interface MenuItemProps {
   children?: React.ReactNode
 }
 
-export const MenuItme: React.FC<MenuItemProps> = (props) => {
+export const MenuItem: React.FC<MenuItemProps> = (props) => {
   const { index, disabled, className, style, children } = props
   const context = useContext(MenuContext)
 
@@ -33,4 +33,4 @@ export const MenuItme: React.FC<MenuItemProps> = (props) => {
   )
 }
 
-MenuItme.displayName = 'MenuItem'
+MenuItem.displayName = 'MenuItem'
