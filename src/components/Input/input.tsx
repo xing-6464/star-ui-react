@@ -46,7 +46,7 @@ export const Input: FC<InputProps> = (props) => {
     ...restProps
   } = props
 
-  const cnames = classNames('viking-input-wrapper', {
+  const cnames = classNames('star-input-wrapper', {
     [`input-size-${size}`]: size,
     'is-disabled': disabled,
     'input-group': prepend || append,
