@@ -54,16 +54,18 @@ export const Input: FC<InputProps> = (props) => {
     'input-group-prepend': !!prepend,
   })
 
-  // const fixControlledValue = (value: any) => {
-  //   if (typeof value === 'undefined' || value === null) {
-  //     return ''
-  //   }
-  //   return value
-  // }
-  // if('value' in props) {
-  //   delete restProps.defaultValue
-  //   restProps.value = fixControlledValue(props.value)
-  // }
+  const fixControlledValue = (value: any) => {
+    if (typeof value === 'undefined' || value === null) {
+      return ''
+    }
+    return value
+  }
+
+  if ('value' in props) {
+    delete restProps.defaultValue
+    restProps.value = fixControlledValue(props.value)
+  }
+
   return (
     <div className={cnames} style={style}>
       {prepend && <div className="star-input-group-prepend">{prepend}</div>}
