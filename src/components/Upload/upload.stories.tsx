@@ -18,13 +18,24 @@ export default {
   },
 } as ComponentMeta<typeof Upload>
 
+const checkFileSize = (file: File) => {
+  if (Math.round(file.size / 1024) > 50) {
+    alert('file too big')
+    return false
+  }
+  return true
+}
+
+const filePromise = (file: File) => {
+  const newFile = new File([file], 'new_name.docx', { type: file.type })
+  return Promise.resolve(newFile)
+}
 export const ASimpleUpload = () => {
   return (
     <Upload
-      action="https://jsonplaceholder.typicode.com/posts"
-      onProgress={action('progress')}
-      onSuccess={action('success')}
-      onError={action('error')}
+      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      onChange={action('changed')}
+      beforeUpload={filePromise}
     />
   )
 }
