@@ -6,11 +6,13 @@ import Select, { SelectProps } from './select'
 import Option from './option'
 config.disabled = true
 
-// jest.mock('../Icon/icon', () => {
-//   return (props: any) => {
-//     return <span onClick={props.onClick}>{props.icon}</span>
-//   }
-// })
+vi.mock('../Icon/icon', () => {
+  return {
+    default: (props: any) => {
+      return <span onClick={props.onClick}>{props.icon}</span>
+    },
+  }
+})
 
 const testProps: SelectProps = {
   defaultValue: '',
@@ -76,7 +78,7 @@ describe('test Select component', () => {
     // fire events
     expect(multipleProps.onChange).toHaveBeenCalledWith('id1', ['id1'])
     // add tags
-    expect(container.querySelectorAll('.viking-tag').length).toEqual(1)
+    expect(container.querySelectorAll('.star-tag').length).toEqual(1)
     //remove placeholder
     expect(inputEle.placeholder).toEqual('')
     // click 2nd item
@@ -85,19 +87,19 @@ describe('test Select component', () => {
       'id1',
       'id2',
     ])
-    expect(container.querySelectorAll('.viking-tag').length).toEqual(2)
+    expect(container.querySelectorAll('.star-tag').length).toEqual(2)
     //reclick 2nd item
     fireEvent.click(secondItem)
     // remove acitve class
     expect(secondItem).not.toHaveClass('is-selected')
     // remove tags
-    expect(container.querySelectorAll('.viking-tag').length).toEqual(1)
+    expect(container.querySelectorAll('.star-tag').length).toEqual(1)
     expect(multipleProps.onChange).toHaveBeenLastCalledWith('id2', ['id1'])
     // click tag close
     fireEvent.click(getByText('times'))
     expect(multipleProps.onChange).toHaveBeenLastCalledWith('id1', [])
     //remove all tags
-    expect(container.querySelectorAll('.viking-tag').length).toEqual(0)
+    expect(container.querySelectorAll('.star-tag').length).toEqual(0)
     //refill placeholder text
     expect(inputEle.placeholder).toEqual('test')
   })
