@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import classNames from 'classnames'
 import type { RuleItem } from 'async-validator'
+import type { CustomRule } from './useStore'
 
 import { FormContext } from './form'
 
@@ -20,7 +21,7 @@ export interface FormItemProps {
   /**设置如何将 event 的值转换成字段值 */
   getValueFromEvent?: (event: any) => any
   /**校验规则，设置字段的校验逻辑。请看 async validator 了解更多规则 */
-  rules?: RuleItem[]
+  rules?: CustomRule[]
   /**设置字段校验的时机 */
   validateTrigger?: string
 }
@@ -59,7 +60,9 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
   const fieldState = fields[name]
   const value = fieldState && fieldState.value
   const errors = fieldState && fieldState.errors
-  const isRequired = rules?.some((rule) => rule.required)
+  const isRequired = rules?.some(
+    (rule) => typeof rule !== 'function' && rule.required
+  )
   const hasError = errors && errors.length > 0
   const labelClass = classNames({
     'star-form-item-required': isRequired,

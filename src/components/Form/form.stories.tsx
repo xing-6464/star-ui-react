@@ -4,6 +4,7 @@ import Form from './form'
 import Item from './formItem'
 import Input from '../Input'
 import Button from '../Button'
+import type { CustomRule } from './useStore'
 
 export default {
   title: 'Form 组件',
@@ -13,6 +14,19 @@ export default {
   decorators: [(Story) => <div style={{ width: '550px' }}>{Story()}</div>],
 } as ComponentMeta<typeof Form>
 
+const confirmRules: CustomRule[] = [
+  { type: 'string', required: true, min: 3, max: 8 },
+  ({ getFiledValue }) => ({
+    asyncValidator(rule, value) {
+      console.info('the value', getFiledValue['password'])
+      console.info(value)
+      if (value !== getFiledValue(['password'])) {
+        return Promise.reject('The two password that you entered do not match')
+      }
+      return Promise.resolve()
+    },
+  }),
+]
 export const BasicForm = () => {
   return (
     <Form initialValues={{ username: 'xing', agreement: true }}>
@@ -28,6 +42,9 @@ export const BasicForm = () => {
         name="password"
         rules={[{ type: 'string', required: true, min: 3, max: 8 }]}
       >
+        <Input type="password" />
+      </Item>
+      <Item label="重复密码" name="confirmPwd" rules={confirmRules}>
         <Input type="password" />
       </Item>
       <div
