@@ -53,7 +53,14 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
     dispatch({
       type: 'addField',
       name,
-      value: { label, name, value: value, rules, isValid: true },
+      value: {
+        label,
+        name,
+        value: value,
+        rules: rules || [],
+        errors: [],
+        isValid: true,
+      },
     })
   }, [])
 
