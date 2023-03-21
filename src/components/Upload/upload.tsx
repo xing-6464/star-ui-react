@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 import axios from 'axios'
 
+import UploadList from './uploadList'
 import Button from '../Button'
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
@@ -59,10 +60,18 @@ import useState from 'react';
  * ~~~
  */
 export const Upload: React.FC<UploadProps> = (props) => {
-  const { action, beforeUpload, onProgress, onSuccess, onError, onChange } =
-    props
+  const {
+    action,
+    defaultFileList,
+    beforeUpload,
+    onProgress,
+    onSuccess,
+    onError,
+    onChange,
+    onRemove,
+  } = props
   const fileInput = useRef<HTMLInputElement>(null)
-  const [fileList, setFileList] = useState<UploadFile[]>([])
+  const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
 
   const updateFileList = (
     updateFile: UploadFile,
@@ -93,6 +102,12 @@ export const Upload: React.FC<UploadProps> = (props) => {
     if (fileInput.current) fileInput.current.value = ''
   }
 
+  const handleRemove = (file: UploadFile) => {
+    setFileList((prevList) => {
+      return prevList.filter((item) => item.uid !== file.uid)
+    })
+    onRemove && onRemove(file)
+  }
   const uploadFiles = (files: FileList) => {
     let postFile = Array.from(files)
     postFile.forEach((file) => {
@@ -134,7 +149,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
           if (percentage < 100) {
             updateFileList(_file, { percent: percentage, status: 'uploading' })
             if (onProgress) {
-              onProgress(percentage, file)
+              onProgress(percentage, _file)
             }
           }
         },
@@ -142,14 +157,14 @@ export const Upload: React.FC<UploadProps> = (props) => {
       .then((resp) => {
         console.info(resp)
         updateFileList(_file, { status: 'success', response: resp.data })
-        onSuccess && onSuccess(resp.data, file)
-        onChange && onChange(file)
+        onSuccess && onSuccess(resp.data, _file)
+        onChange && onChange(_file)
       })
       .catch((err) => {
         console.error(err)
         updateFileList(_file, { status: 'error', error: err })
-        onError && onError(err, file)
-        onChange && onChange(file)
+        onError && onError(err, _file)
+        onChange && onChange(_file)
       })
   }
 
@@ -165,6 +180,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />
+      <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   )
 }
