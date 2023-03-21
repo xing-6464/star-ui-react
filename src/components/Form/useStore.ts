@@ -65,7 +65,7 @@ function useStore(initialValues?: Record<string, any>) {
   })
   const [fields, dispatch] = useReducer(fieldsReducer, {})
 
-  const getFiledValue = (key: string) => {
+  const getFieldValue = (key: string) => {
     return fields[key] && fields[key].value
   }
   const getFieldsValue = () => {
@@ -88,7 +88,7 @@ function useStore(initialValues?: Record<string, any>) {
   const transfromRules = (rules: CustomRule[]) => {
     return rules.map((rule) => {
       if (typeof rule === 'function') {
-        const calledRull = rule({ getFiledValue })
+        const calledRull = rule({ getFieldValue })
         return calledRull
       } else {
         return rule
@@ -173,7 +173,7 @@ function useStore(initialValues?: Record<string, any>) {
     dispatch,
     form,
     validateField,
-    getFiledValue,
+    getFieldValue,
     validateAllFields,
     getFieldsValue,
     setFieldValue,

@@ -79,10 +79,6 @@ export const Form = forwardRef<IFormRef, FormProps>((props, ref) => {
           {childrenNode}
         </FormContext.Provider>
       </form>
-      <div>
-        <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(fields)}</pre>
-        <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(form)}</pre>
-      </div>
     </>
   )
 })
