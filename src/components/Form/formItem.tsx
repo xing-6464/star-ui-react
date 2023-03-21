@@ -58,6 +58,15 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
 
   const fieldState = fields[name]
   const value = fieldState && fieldState.value
+  const errors = fieldState && fieldState.errors
+  const isRequired = rules?.some((rule) => rule.required)
+  const hasError = errors && errors.length > 0
+  const labelClass = classNames({
+    'star-form-item-required': isRequired,
+  })
+  const itemClass = classNames('star-form-item-control', {
+    'star-form-item-has-error': hasError,
+  })
   const onValueUpdate = (e: any) => {
     const value = getValueFromEvent(e)
     dispatch({ type: 'updateValue', name, value })
@@ -105,10 +114,19 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
     <div className={rowClass}>
       {label && (
         <div className="star-form-item-label">
-          <label title={label}>{label}</label>
+          <label title={label} className={labelClass}>
+            {label}
+          </label>
         </div>
       )}
-      <div className="star-form-item">{returnChildNode}</div>
+      <div className="star-form-item">
+        <div className={itemClass}>{returnChildNode}</div>
+        {hasError && (
+          <div className="star-form-item-explain">
+            <span>{errors[0].message}</span>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
