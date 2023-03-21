@@ -3,6 +3,7 @@ import React, {
   FC,
   InputHTMLAttributes,
   ReactElement,
+  forwardRef,
 } from 'react'
 import type { IconProp } from '@fortawesome/fontawesome-svg-core'
 import classNames from 'classnames'
@@ -34,7 +35,7 @@ export interface InputProps
  *
  * 支持 HTMLInput 的所有基本属性
  */
-export const Input: FC<InputProps> = (props) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     disabled,
     size,
@@ -74,10 +75,15 @@ export const Input: FC<InputProps> = (props) => {
           <Icon icon={icon} title={`title-${icon}`} />
         </div>
       )}
-      <input className="star-input-inner" disabled={disabled} {...restProps} />
+      <input
+        ref={ref}
+        className="star-input-inner"
+        disabled={disabled}
+        {...restProps}
+      />
       {append && <div className="star-input-group-append">{append}</div>}
     </div>
   )
-}
+})
 
 export default Input
