@@ -1,7 +1,8 @@
 import React from 'react'
 import { render, fireEvent, RenderResult } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { TabItem, Tabs, TabsProps } from '.'
+import { Tabs, TabsProps } from './tabs'
+import TabItem from './tabItem'
 
 const testProps: TabsProps = {
   defaultIndex: 1,
