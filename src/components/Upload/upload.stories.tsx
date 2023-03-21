@@ -18,15 +18,7 @@ export default {
 } as ComponentMeta<typeof Upload>
 
 export const ASimpleUpload = (args: any) => (
-  <Upload
-    {...args}
-    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-    name="filename"
-    data={{ key: 'value' }}
-    headers={{ 'X-Powered-By': 'xing' }}
-    accept=".jpg"
-    multiple
-  >
+  <Upload {...args} action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
     <Button size="lg" btnType="primary">
       <Icon icon="upload" /> 点击上传{' '}
     </Button>
