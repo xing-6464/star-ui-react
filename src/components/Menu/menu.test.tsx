@@ -1,8 +1,24 @@
 import React from 'react'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { Menu, MenuItme, SubMenu } from '.'
+import Menu from './index'
 
-import type { MenuProps } from '.'
+import type { MenuProps } from './menu'
+
+vi.mock('../Icon/icon', () => {
+  return {
+    default: () => <i className="fa" />,
+  }
+  return () => {
+    return <i className="fa" />
+  }
+})
+vi.mock('react-transition-group', () => {
+  return {
+    CSSTransition: (props: any) => {
+      return props.children
+    },
+  }
+})
 
 const testProps: MenuProps = {
   defaultIndex: '0',
@@ -33,12 +49,12 @@ const createStyleFile = () => {
 const generateMenu = (props: MenuProps) => {
   return (
     <Menu {...props}>
-      <MenuItme>active</MenuItme>
-      <MenuItme disabled>disabled</MenuItme>
-      <MenuItme>xyz</MenuItme>
-      <SubMenu title="dropdown">
-        <MenuItme>drop1</MenuItme>
-      </SubMenu>
+      <Menu.Item>active</Menu.Item>
+      <Menu.Item disabled>disabled</Menu.Item>
+      <Menu.Item>xyz</Menu.Item>
+      <Menu.SubMenu title="dropdown">
+        <Menu.Item>drop1</Menu.Item>
+      </Menu.SubMenu>
     </Menu>
   )
 }
