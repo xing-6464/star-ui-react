@@ -53,7 +53,8 @@ export interface UploadProps {
  * ### 引用方法
  *
  * ~~~js
- * import { Upload } from 'vikingship'
+ * import { Upload } from 'star'
+ *
  * ~~~
  */
 export const Upload: FC<UploadProps> = (props) => {

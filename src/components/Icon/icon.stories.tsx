@@ -8,6 +8,7 @@ export default {
   id: 'Icon',
   component: Icon,
 } as ComponentMeta<typeof Icon>
+
 export const ADefaultIcons = () => (
   <>
     <Icon icon="check" size="3x" />
