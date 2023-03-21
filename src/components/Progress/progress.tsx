@@ -11,6 +11,7 @@ export interface ProgressProps {
 
 const Progress: FC<ProgressProps> = (props) => {
   const { percent, strokeHeight, showText, styles, theme } = props
+
   return (
     <div className="star-progress-bar" style={styles}>
       <div
