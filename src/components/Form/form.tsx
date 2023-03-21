@@ -1,4 +1,9 @@
-import React, { createContext, ReactNode } from 'react'
+import React, {
+  createContext,
+  ReactNode,
+  forwardRef,
+  useImperativeHandle,
+} from 'react'
 import useStore from './useStore'
 
 import type { ValidateError } from 'async-validator'
@@ -27,12 +32,23 @@ export type IFormContext = Pick<
 > &
   Pick<FormProps, 'initialValues'>
 
+export type IFormRef = Omit<
+  ReturnType<typeof useStore>,
+  'fields' | 'dispatch' | 'form'
+>
+
 export const FormContext = createContext<IFormContext>({} as IFormContext)
 
-export const Form: React.FC<FormProps> = (props) => {
+export const Form = forwardRef<IFormRef, FormProps>((props, ref) => {
   const { name, initialValues, children, onFinish, onFinishFailed } = props
-  const { form, fields, dispatch, validateField, validateAllFields } =
-    useStore(initialValues)
+  const { form, fields, dispatch, ...restProps } = useStore(initialValues)
+  const { validateField, validateAllFields } = restProps
+
+  useImperativeHandle(ref, () => {
+    return {
+      ...restProps,
+    }
+  })
 
   const passedContext: IFormContext = {
     dispatch,
@@ -69,7 +85,7 @@ export const Form: React.FC<FormProps> = (props) => {
       </div>
     </>
   )
-}
+})
 
 Form.defaultProps = {
   name: 'star_form',

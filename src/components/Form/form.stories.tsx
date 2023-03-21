@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { ComponentMeta } from '@storybook/react'
 import Form from './form'
 import Item from './formItem'
 import Input from '../Input'
 import Button from '../Button'
 import type { CustomRule } from './useStore'
+import { IFormRef } from './form'
 
 export default {
   title: 'Form 组件',
@@ -37,8 +38,17 @@ const confirmRules: CustomRule[] = [
   }),
 ]
 export const BasicForm = (args: any) => {
+  const ref = useRef<IFormRef>()
+  const resetAll = () => {
+    console.info('form ref', ref.current)
+    ref.current?.resetFields()
+  }
   return (
-    <Form initialValues={{ username: 'xing', agreement: true }} {...args}>
+    <Form
+      initialValues={{ username: 'xing', agreement: true }}
+      ref={ref}
+      {...args}
+    >
       {({ isValid, isSubmitting }) => (
         <>
           <Item
@@ -78,6 +88,9 @@ export const BasicForm = (args: any) => {
             <Button type="submit" btnType="primary">
               登录 {isSubmitting ? '验证中' : '验证完毕'}{' '}
               {isValid ? '通过' : '没有通过'}
+            </Button>
+            <Button type="button" onClick={resetAll}>
+              重置
             </Button>
           </div>
         </>
