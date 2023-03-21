@@ -32,7 +32,7 @@ export const FormContext = createContext<IFormContext>({} as IFormContext)
 export const Form: React.FC<FormProps> = (props) => {
   const { name, initialValues, children, onFinish, onFinishFailed } = props
   const { form, fields, dispatch, validateField, validateAllFields } =
-    useStore()
+    useStore(initialValues)
 
   const passedContext: IFormContext = {
     dispatch,
