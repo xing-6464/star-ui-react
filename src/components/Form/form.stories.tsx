@@ -9,7 +9,7 @@ export default {
   title: 'Form 组件',
   id: 'Form',
   component: Form,
-  subcomponents: { Item: Item },
+  subcomponents: { Item },
   decorators: [(Story) => <div style={{ width: '550px' }}>{Story()}</div>],
 } as ComponentMeta<typeof Form>
 
@@ -26,7 +26,11 @@ export const BasicForm = () => {
         className="agreement-section"
         style={{ display: 'flex', justifyContent: 'center' }}
       >
-        <Item name="agreement">
+        <Item
+          name="agreement"
+          valuePropName="checked"
+          getValueFromEvent={(e) => e.target.checked}
+        >
           <input type="checkbox" />
         </Item>
         <span className="agree-text">
