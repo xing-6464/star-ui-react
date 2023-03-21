@@ -46,7 +46,11 @@ export const Alert: FC<AlertProps> = (props) => {
         <span className={titleClass}>{title}</span>
         {description && <p className="star-alert-desc">{description}</p>}
         {closable && (
-          <span className="star-alert-close" onClick={handleClose}>
+          <span
+            className="star-alert-close"
+            onClick={handleClose}
+            data-testid="itmes"
+          >
             <Icon icon="times" />
           </span>
         )}

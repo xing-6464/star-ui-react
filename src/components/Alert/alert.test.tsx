@@ -2,7 +2,7 @@ import React from 'react'
 import { config } from 'react-transition-group'
 import { render, fireEvent, screen } from '@testing-library/react'
 
-import { Alert, AlertProps } from '.'
+import { Alert, AlertProps } from './alert'
 config.disabled = true
 
 // vi.mock('../Icon/icon', () => {
@@ -32,16 +32,16 @@ describe('test Alert Component', () => {
     expect(container.querySelector('.star-alert')).toHaveClass(
       'star-alert-default'
     )
-    fireEvent.click(screen.getByText('times'))
+    fireEvent.click(screen.getByTestId('itmes'))
     expect(testProps.onClose).toHaveBeenCalled()
     expect(screen.queryByText('title')).not.toBeInTheDocument()
   })
   it('should render the correct Alert based on different type and description', () => {
     const { container } = render(<Alert {...typeProps} />)
     expect(screen.queryByText('title')).toHaveClass('bold-title')
-    // expect(container.querySelector('.star-alert')).toHaveClass(
-    //   'star-alert-success'
-    // )
+    expect(container.querySelector('.star-alert')).toHaveClass(
+      'star-alert-success'
+    )
     expect(screen.queryByText('hello')).toBeInTheDocument()
     expect(screen.queryByText('times')).not.toBeInTheDocument()
   })
