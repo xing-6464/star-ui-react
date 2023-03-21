@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import classNames from 'classnames'
+import type { RuleItem } from 'async-validator'
 
 import { FormContext } from './form'
 
@@ -19,7 +20,7 @@ export interface FormItemProps {
   /**设置如何将 event 的值转换成字段值 */
   getValueFromEvent?: (event: any) => any
   /**校验规则，设置字段的校验逻辑。请看 async validator 了解更多规则 */
-  // rules?: CustomRule[];
+  rules?: RuleItem[]
   /**设置字段校验的时机 */
   validateTrigger?: string
 }
@@ -32,35 +33,47 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
     trigger,
     getValueFromEvent,
     label,
+    rules,
     children,
   } = props as SomeRequired<
     FormItemProps,
-    'getValueFromEvent' | 'trigger' | 'valuePropName'
+    'getValueFromEvent' | 'trigger' | 'valuePropName' | 'validateTrigger'
   >
 
   const rowClass = classNames('star-row', {
     'star-row-no-label': !label,
   })
 
-  const { dispatch, fields, initialValues } = useContext(FormContext)
+  const { dispatch, fields, initialValues, validateField } =
+    useContext(FormContext)
 
   useEffect(() => {
     const value = (initialValues && initialValues[name]) || ''
-    dispatch({ type: 'addField', name, value: { label, name, value: value } })
+    dispatch({
+      type: 'addField',
+      name,
+      value: { label, name, value: value, rules, isValid: true },
+    })
   }, [])
 
   const fieldState = fields[name]
   const value = fieldState && fieldState.value
   const onValueUpdate = (e: any) => {
     const value = getValueFromEvent(e)
-    console.info('new value', value)
     dispatch({ type: 'updateValue', name, value })
+  }
+
+  const onValueValidate = async () => {
+    await validateField(name)
   }
 
   // 1.手动创建一个属性列表，需要有value 以及 onChange 属性
   const controlProps: Record<string, any> = {}
   controlProps[valuePropName] = value
   controlProps[trigger] = onValueUpdate
+  if (rules) {
+    controlProps[validateTrigger] = onValueValidate
+  }
 
   // 2.获取 children 数组的第一个元素
   const childList = React.Children.toArray(children)
@@ -103,6 +116,7 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
 FormItem.defaultProps = {
   valuePropName: 'value',
   trigger: 'onChange',
+  validateTrigger: 'onBlur',
   getValueFromEvent: (e) => e.target.value,
 }
 export default FormItem
