@@ -1,10 +1,21 @@
-import React, { createContext } from 'react'
+import React, { createContext, ReactNode } from 'react'
 import useStore from './useStore'
 
+import type { ValidateError } from 'async-validator'
+
 export interface FormProps {
+  /**表单名称，会作为表单字段 id 前缀使用 */
   name?: string
+  /**表单默认值，只有初始化以及重置时生效 */
   initialValues?: Record<string, any>
-  children?: React.ReactNode
+  children?: ReactNode
+  /**提交表单且数据验证成功后回调事件 */
+  onFinish?: (values: Record<string, any>) => void
+  /**提交表单且数据验证失败后回调事件 */
+  onFinishFailed?: (
+    values: Record<string, any>,
+    errors: Record<string, ValidateError[]>
+  ) => void
 }
 
 export type IFormContext = Pick<
@@ -16,8 +27,9 @@ export type IFormContext = Pick<
 export const FormContext = createContext<IFormContext>({} as IFormContext)
 
 export const Form: React.FC<FormProps> = (props) => {
-  const { name, initialValues, children } = props
-  const { form, fields, dispatch, validateField } = useStore()
+  const { name, initialValues, children, onFinish, onFinishFailed } = props
+  const { form, fields, dispatch, validateField, validateAllFields } =
+    useStore()
 
   const passedContext: IFormContext = {
     dispatch,
@@ -25,10 +37,19 @@ export const Form: React.FC<FormProps> = (props) => {
     initialValues,
     validateField,
   }
-
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const { isValid, errors, values } = await validateAllFields()
+    if (isValid && onFinish) {
+      onFinish(values)
+    } else if (!isValid && onFinishFailed) {
+      onFinishFailed(values, errors)
+    }
+  }
   return (
     <>
-      <form name={name} className="star-form">
+      <form name={name} className="star-form" onSubmit={submitForm}>
         <FormContext.Provider value={passedContext}>
           {children}
         </FormContext.Provider>
