@@ -39,6 +39,14 @@ export type IFormRef = Omit<
 
 export const FormContext = createContext<IFormContext>({} as IFormContext)
 
+/**
+ * 表单组件
+ * ### 引用方法
+ *
+ * ```javascript
+ * import { Form } from 'star'
+ * ```
+ */
 export const Form = forwardRef<IFormRef, FormProps>((props, ref) => {
   const { name, initialValues, children, onFinish, onFinishFailed } = props
   const { form, fields, dispatch, ...restProps } = useStore(initialValues)
