@@ -1,8 +1,11 @@
 {
   "name": "star-ui-react",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "main": "build/main.js",
+  "module": "build/main.js",
+  "types": "build/main.d.ts",
   "scripts": {
     "dev": "vite",
     "test": "vitest",
