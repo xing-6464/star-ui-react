@@ -156,7 +156,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
           setSugestions([])
         }}
       >
-        <ul className="viking-suggestion-list">
+        <ul className="star-suggestion-list">
           {loading && (
             <div className="suggstions-loading-icon">
               <Icon icon="spinner" spin />
@@ -182,7 +182,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   }
 
   return (
-    <div className="viking-auto-complete" ref={componentRef}>
+    <div className="star-auto-complete" ref={componentRef}>
       <Input
         {...restProps}
         value={inputValue}
