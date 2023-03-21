@@ -63,12 +63,19 @@ export const Upload: React.FC<UploadProps> = (props) => {
   const {
     action,
     defaultFileList,
+    name,
+    data,
+    withCredentials,
+    headers,
+    accept,
+    multiple,
     beforeUpload,
     onProgress,
     onSuccess,
     onError,
     onChange,
     onRemove,
+    children,
   } = props
   const fileInput = useRef<HTMLInputElement>(null)
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
@@ -135,17 +142,28 @@ export const Upload: React.FC<UploadProps> = (props) => {
       percent: 0,
       raw: file,
     }
-    setFileList([_file, ...fileList])
+    // setFileList([_file, ...fileList])
+    setFileList((prevList) => {
+      return [_file, ...prevList]
+    })
     const formData = new FormData()
-    formData.append(file.name, file)
+    formData.append(name || 'file', file)
+
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key])
+      })
+    }
 
     axios
       .post(action, formData, {
         headers: {
+          ...headers,
           'Content-Type': 'multipart/form-data',
         },
+        withCredentials,
         onUploadProgress: (e) => {
-          let percentage = Math.round((e.loaded * 100) / e.total!) || 1
+          let percentage = Math.round((e.loaded * 100) / e.total!) || 0
           if (percentage < 100) {
             updateFileList(_file, { percent: percentage, status: 'uploading' })
             if (onProgress) {
@@ -179,10 +197,15 @@ export const Upload: React.FC<UploadProps> = (props) => {
         className="star-file-input"
         style={{ display: 'none' }}
         onChange={handleFileChange}
+        accept={accept}
+        multiple={multiple}
       />
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   )
 }
 
+Upload.defaultProps = {
+  name: 'file',
+}
 export default Upload
