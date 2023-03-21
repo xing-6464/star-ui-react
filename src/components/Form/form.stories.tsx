@@ -16,20 +16,17 @@ export default {
 export const BasicForm = () => {
   return (
     <Form>
-      <Item label="用户名">
+      <Item label="用户名" name="username">
         <Input />
       </Item>
-      <Item label="密码">
+      <Item label="密码" name="password">
         <Input type="password" />
-      </Item>
-      <Item>
-        <Input placeholder="no-label" />
       </Item>
       <div
         className="agreement-section"
         style={{ display: 'flex', justifyContent: 'center' }}
       >
-        <Item>
+        <Item name="agreement">
           <input type="checkbox" />
         </Item>
         <span className="agree-text">

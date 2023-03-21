@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext } from 'react'
 import useStore from './useStore'
 
 export interface FormProps {
@@ -6,14 +6,23 @@ export interface FormProps {
   children?: React.ReactNode
 }
 
+export type IFormContext = Pick<ReturnType<typeof useStore>, 'dispatch'>
+
+export const FormContext = createContext<IFormContext>({} as IFormContext)
+
 export const Form: React.FC<FormProps> = (props) => {
   const { name, children } = props
-  const { form, fields } = useStore()
+  const { form, fields, dispatch } = useStore()
+  const passedContext: IFormContext = {
+    dispatch,
+  }
 
   return (
     <>
       <form name={name} className="star-form">
-        {children}
+        <FormContext.Provider value={passedContext}>
+          {children}
+        </FormContext.Provider>
       </form>
       <div>
         <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(fields)}</pre>
