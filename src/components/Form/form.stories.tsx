@@ -15,7 +15,7 @@ export default {
 
 export const BasicForm = () => {
   return (
-    <Form>
+    <Form initialValues={{ username: 'xing', agreement: true }}>
       <Item label="用户名" name="username">
         <Input />
       </Item>

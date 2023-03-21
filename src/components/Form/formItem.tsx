@@ -3,6 +3,9 @@ import classNames from 'classnames'
 
 import { FormContext } from './form'
 
+export type SomeRequired<T, K extends keyof T> = Required<Pick<T, K>> &
+  Omit<T, K>
+
 export interface FormItemProps {
   /**字段名 */
   name: string
@@ -30,30 +33,34 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
     getValueFromEvent,
     label,
     children,
-  } = props
+  } = props as SomeRequired<
+    FormItemProps,
+    'getValueFromEvent' | 'trigger' | 'valuePropName'
+  >
 
   const rowClass = classNames('star-row', {
     'star-row-no-label': !label,
   })
 
-  const { dispatch, fields } = useContext(FormContext)
+  const { dispatch, fields, initialValues } = useContext(FormContext)
 
   useEffect(() => {
-    dispatch({ type: 'addField', name, value: { label, name, value: '' } })
+    const value = (initialValues && initialValues[name]) || ''
+    dispatch({ type: 'addField', name, value: { label, name, value: value } })
   }, [])
 
   const fieldState = fields[name]
   const value = fieldState && fieldState.value
   const onValueUpdate = (e: any) => {
-    const value = getValueFromEvent && getValueFromEvent(e)
+    const value = getValueFromEvent(e)
     console.info('new value', value)
     dispatch({ type: 'updateValue', name, value })
   }
 
   // 1.手动创建一个属性列表，需要有value 以及 onChange 属性
   const controlProps: Record<string, any> = {}
-  controlProps[valuePropName!] = value
-  controlProps[trigger!] = onValueUpdate
+  controlProps[valuePropName] = value
+  controlProps[trigger] = onValueUpdate
 
   // 2.获取 children 数组的第一个元素
   const childList = React.Children.toArray(children)
