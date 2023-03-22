@@ -1,21 +1,41 @@
 {
   "name": "star-ui-react",
-  "private": true,
+  "private": false,
+  "description": "React components ui library",
+  "author": "starlight",
   "version": "0.1.0",
   "type": "module",
-  "main": "build/main.js",
-  "module": "build/main.js",
-  "types": "build/main.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "keywords": [
+    "Componet",
+    "UI",
+    "React"
+  ],
+  "homepage": "http://vikingship.xyz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xing-6464/star-ui-react"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "dist/index.css"
+  ],
   "scripts": {
     "dev": "vite",
     "test": "vitest",
-    "clean": "rimraf ./build",
+    "clean": "rimraf ./dist",
     "build": "npm rum clean && npm run build-ts && npm run build-css",
     "build-ts": "tsc -p tsconfig.build.json",
-    "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
+    "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepublishOnly": "npm rum build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -24,11 +44,7 @@
     "async-validator": "^4.2.5",
     "axios": "^1.3.4",
     "classnames": "^2.3.2",
-    "lodash-es": "^4.17.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-transition-group": "^4.4.5",
-    "sass": "^1.58.3"
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -47,10 +63,14 @@
     "@types/react-transition-group": "^4.4.5",
     "@vitejs/plugin-react": "^3.1.0",
     "babel-loader": "^8.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "jsdom": "^21.1.0",
     "node-sass": "^8.0.0",
     "sass-loader": "^13.2.1",
     "typescript": "^4.9.3",
+    "lodash-es": "^4.17.21",
+    "sass": "^1.58.3",
     "vite": "^4.1.0",
     "vitest": "^0.29.2"
   }
